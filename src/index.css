@@ -1,0 +1,130 @@
+body {
+  background-color: #FCA5AF;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px; 
+  background-color: #F86B86;
+  z-index: 0; 
+}
+
+.container {
+  width: 550px;  
+  height: 400px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.centered-title {
+  font-family: serif;
+  position: absolute;
+  top: 8%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3.5rem;
+  font-weight: bold;
+  text-align: center;
+  z-index: 10;
+}
+
+.survey-form {
+  padding: 30px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+.form-label {
+  display: block;
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid gray;
+  background: transparent;
+  font-size: 16px;
+  padding: 5px;
+  outline: none;
+  font-family: serif; 
+  margin-left: 60px;
+}
+
+.textarea {
+  font-family: serif; 
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid gray;
+  background: transparent;
+  font-size: 16px;
+  padding: 5px;
+  outline: none;
+  resize: none; 
+  margin-left: 60px;
+}
+
+.form-input:focus {
+  border-bottom: 2px solid black;
+}
+
+.submit-button {
+  background-color: transparent;
+  color: black;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 2px solid gray; 
+  border-radius: 15px;
+  cursor: pointer;
+  width: 70%;
+  margin: 50px auto;
+  display: block; 
+}
+
+.submit-button:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.822);
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: gray;
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
