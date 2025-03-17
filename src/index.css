@@ -4,8 +4,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  position: relative;
+  min-height: 100vh;
 }
 
 body::after {
@@ -19,19 +18,39 @@ body::after {
   z-index: 0; 
 }
 
+/* Main wrapper to hold both containers */
+.main-container {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center them horizontally */
+  gap: 20px; /* Add spacing between containers */
+  width: 100%;
+}
+
+/* First container (Name & Email) */
 .container {
-  width: 550px;  
-  height: 400px;
-  background-color: white;
-  padding: 20px;
+  width: 500px;
+  padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background: white;
+  margin-bottom: 20px;
+}
+
+/* Second container (Feedback) */
+.feedback-container {
+  width: 500px;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background: white;
+  margin-top: 20px;
 }
 
 .centered-title {
   font-family: serif;
   position: absolute;
-  top: 8%; 
+  top: 6%; 
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 3.5rem;
@@ -47,12 +66,12 @@ body::after {
 }
 
 .form-group {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .form-label {
   display: block;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -65,13 +84,12 @@ body::after {
   font-size: 16px;
   padding: 5px;
   outline: none;
-  font-family: serif; 
   margin-left: 60px;
 }
 
 .textarea {
   font-family: serif; 
-  width: 80%;
+  width: 70%;
   border: none;
   border-bottom: 1px solid gray;
   background: transparent;
@@ -79,7 +97,7 @@ body::after {
   padding: 5px;
   outline: none;
   resize: none; 
-  margin-left: 60px;
+  margin-left: 80px;
 }
 
 .form-input:focus {
@@ -89,14 +107,15 @@ body::after {
 .submit-button {
   background-color: transparent;
   color: black;
-  padding: 12px 20px;
-  font-size: 16px;
-  border: 2px solid gray; 
+  padding: 10px 15px;
+  font-size: 14px;
+  border: 2px solid gray;
   border-radius: 15px;
   cursor: pointer;
-  width: 70%;
-  margin: 50px auto;
-  display: block; 
+  width: 30%;
+  margin: 30px auto 0 auto; /* Centers the button */
+  display: block; /* Ensures it takes up full line width */
+  text-align: center;
 }
 
 .submit-button:hover {

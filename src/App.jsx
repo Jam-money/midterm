@@ -1,45 +1,93 @@
 import { useState } from "react";
-import SurveyForm from "./SurveyForm";
 import { supabase } from "./supabaseClient";
 
 const App = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    feedback: "",
+  });
+
   const [showPopup, setShowPopup] = useState(false);
 
-  const handleSubmit = async (formData) => {
-    try {
-      if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
-        throw new Error("Supabase credentials are missing in the .env file");
-      }
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
       const { data, error } = await supabase
-        .from("survey_responses") 
+        .from("survey_responses") // Replace with your actual table name
         .insert([formData]);
 
       if (error) {
-        console.error("Supabase Insert Error:", error.message);
-        throw new Error("Failed to save data. Check Supabase settings.");
+        throw error;
       }
 
-      console.log("Inserted Data:", data);
+      console.log("Form submitted successfully:", data);
 
-      setShowPopup(true);
+      setShowPopup(true); // Show popup
 
-      setTimeout(() => setShowPopup(false), 3000);
-      
-    } catch (err) {
-      console.error("Error:", err.message);
+      setTimeout(() => {
+        setShowPopup(false); // Hide popup after 3 seconds
+      }, 3000);
+
+      setFormData({ name: "", email: "", feedback: "" }); // Clear form
+
+    } catch (error) {
+      console.error("Submission error:", error.message);
     }
   };
 
   return (
-    <div className="relative flex items-center justify-center min-h-screen bg-pink-300">
+    <div className="main-container">
       <h1 className="centered-title">Survey Form</h1>
-      <div className="container p-6 bg-white border border-gray-400 shadow-lg relative z-10 flex flex-col justify-center">
-        <div className="p-8">
-          <SurveyForm onSubmit={handleSubmit} />
-        </div>
-      </div>
 
+      <form onSubmit={handleSubmit} className="survey-form">
+        <div className="container">
+          <div className="form-group">
+            <label className="form-label">Name:</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">Email:</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
+        </div>
+
+        <div className="feedback-container">
+          <div className="form-group">
+            <label className="form-label">Feedback:</label>
+            <textarea
+              name="feedback"
+              value={formData.feedback}
+              onChange={handleChange}
+              required
+              className="form-input textarea"
+              rows="3"
+            />
+          </div>
+          <button type="submit" className="submit-button">Submit</button>
+        </div>
+      </form>
+
+      {/* Popup Message */}
       {showPopup && (
         <div className="popup">
           <p>Submitted successfully!</p>
